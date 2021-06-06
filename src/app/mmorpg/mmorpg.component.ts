@@ -4,32 +4,32 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-action',
-  templateUrl: './action.component.html',
-  styleUrls: ['./action.component.css']
+  selector: 'app-mmorpg',
+  templateUrl: './mmorpg.component.html',
+  styleUrls: ['./mmorpg.component.css']
 })
-export class ActionComponent implements OnInit {
+export class MmorpgComponent implements OnInit {
 
   mySubscription : Subscription;
-  action;
+  mmorpg;
   searchTerm:string;
   p = 1;
   constructor(private gds : GamesdataService, private router : Router) { }
 
   ngOnInit(): void {
-    this.mySubscription = this.gds.getAction().subscribe(
-      acData => {
-            this.action = acData;
+    this.mySubscription = this.gds.getMMORPG().subscribe(
+      mData => {
+            this.mmorpg = mData;
       },
       err => {
-        console.log('err in getting strategy games', err);
+        console.log('err in getting mmorpg games', err);
       }
     )
   }
 
   onSelectId(id)
   {
-    this.router.navigateByUrl('/gamesinfo/'+id)
+    this.router.navigateByUrl('games/action/'+id)
   }
 
 }

@@ -1,35 +1,24 @@
-<p>action works!</p>
-<div class="row row-cols-1 row-cols-lg-3">
-    <div class="col" *ngFor="let actionObj of action">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="..." alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<div clng ass="container w-75">
 
-<nav aria-label="...">
-    <ul class="pagination">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item active" aria-current="page">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    </ul>
-  </nav>
+  <input type="text" name="title" placeholder="Search game by its name" class="form-control mt-4 mb-3"
+  [(ngModel)]= "searchTerm">
+
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
+      <div *ngFor="let actionObj of action | search:searchTerm | paginate: {itemsPerPage:9, currentPage:p}">       
+          <div class="col" >
+              <div class="card text-center mt-3 border border-dark mb-3 animate__animated animate__flipInY">
+                  <img src={{actionObj.thumbnail}} width="100%">
+                  <div class="card-body text-white bg-dark">
+                      <div class="card-title mt-3" id="gameTitle"><h4>{{actionObj.title}}</h4></div>
+                      <hr class="text-white">
+                      <button class="btn btn-primary mt-3 mb-3" (click)="onSelectId(actionObj.id)"><i class="fas fa-info-circle me-2"></i>Game Info</button>
+                  </div>
+              </div>
+          </div>
+      </div>  
+  </div>
+
+
+
+  <pagination-controls (pageChange)="p=$event" class="text-center"></pagination-controls>
+</div>

@@ -4,32 +4,32 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-action',
-  templateUrl: './action.component.html',
-  styleUrls: ['./action.component.css']
+  selector: 'app-moba',
+  templateUrl: './moba.component.html',
+  styleUrls: ['./moba.component.css']
 })
-export class ActionComponent implements OnInit {
+export class MobaComponent implements OnInit {
 
   mySubscription : Subscription;
-  action;
+  moba;
   searchTerm:string;
   p = 1;
   constructor(private gds : GamesdataService, private router : Router) { }
 
   ngOnInit(): void {
-    this.mySubscription = this.gds.getAction().subscribe(
-      acData => {
-            this.action = acData;
+    this.mySubscription = this.gds.getMOBA().subscribe(
+      mData => {
+            this.moba = mData;
       },
       err => {
-        console.log('err in getting strategy games', err);
+        console.log('err in getting moba games', err);
       }
     )
   }
 
   onSelectId(id)
   {
-    this.router.navigateByUrl('/gamesinfo/'+id)
+    this.router.navigateByUrl('games/action/'+id)
   }
 
 }
